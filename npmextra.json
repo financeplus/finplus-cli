@@ -1,0 +1,17 @@
+{
+  "gitzone": {
+    "module": {
+      "githost": "gitlab.com",
+      "gitscope": "financeplus",
+      "gitrepo": "finplus-cli",
+      "shortDescription": "a cli tool for the financeplus ecosystem",
+      "npmPackagename": "@financeplus/finplus-cli",
+      "license": "MIT",
+      "projectDomain": "finance.plus"
+    }
+  },
+  "npmci": {
+    "npmGlobalTools": [],
+    "npmAccessLevel": "public"
+  }
+}
