@@ -8,7 +8,7 @@
   "author": "Lossless GmbH",
   "license": "MIT",
   "scripts": {
-    "test": "(tstest test/)",
+    "test": "(tstest test/ && node cli.ts.js && node cli.ts.js csv)",
     "build": "(tsbuild)",
     "format": "(gitzone format)"
   },
@@ -17,18 +17,21 @@
   },
   "devDependencies": {
     "@gitzone/tsbuild": "^2.1.11",
-    "@gitzone/tstest": "^1.0.21",
+    "@gitzone/tstest": "^1.0.24",
     "@pushrocks/tapbundle": "^3.0.7",
-    "@types/node": "^12.0.2",
-    "tslint": "^5.16.0",
+    "@types/node": "^12.0.8",
+    "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.15.0"
   },
   "dependencies": {
+    "@financeplus/csv-fidor": "^1.0.10",
+    "@financeplus/csv-paypal": "^1.0.8",
+    "@financeplus/csv-sevdesk": "^1.0.4",
     "@pushrocks/early": "^3.0.3",
     "@pushrocks/projectinfo": "^4.0.2",
     "@pushrocks/smartcli": "^3.0.7",
     "@pushrocks/smartfile": "^7.0.2",
     "@pushrocks/smartlog": "^2.0.19",
-    "@pushrocks/smartlog-destination-local": "^7.0.5"
+    "@pushrocks/smartlog-destination-local": "^8.0.2"
   }
 }
