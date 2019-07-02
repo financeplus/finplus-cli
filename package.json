@@ -24,15 +24,26 @@
     "tslint-config-prettier": "^1.15.0"
   },
   "dependencies": {
+    "@financeplus/csv-commerzbank": "^1.0.4",
     "@financeplus/csv-fidor": "^1.0.10",
     "@financeplus/csv-paypal": "^1.0.8",
     "@financeplus/csv-sevdesk": "^1.0.4",
-    "@financeplus/csv-spendesk": "^1.0.4",
+    "@financeplus/csv-spendesk": "^1.0.5",
     "@pushrocks/early": "^3.0.3",
     "@pushrocks/projectinfo": "^4.0.2",
     "@pushrocks/smartcli": "^3.0.7",
-    "@pushrocks/smartfile": "^7.0.3",
+    "@pushrocks/smartfile": "^7.0.4",
     "@pushrocks/smartlog": "^2.0.19",
     "@pushrocks/smartlog-destination-local": "^8.0.2"
-  }
+  },
+  "files": [
+    "ts/*",
+    "ts_web/*",
+    "dist/*",
+    "dist_web/*",
+    "assets/*",
+    "cli.js",
+    "npmextra.json",
+    "readme.md"
+  ]
 }

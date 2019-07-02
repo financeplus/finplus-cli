@@ -12,8 +12,6 @@ const run = async () => {
   await finplusCli.run();
 };
 
-if(process.env.CLI_CALL) {
+if (process.env.CLI_CALL) {
   run();
 }
-
-
