@@ -18,8 +18,8 @@ const parseCommerzbank = async () => {
   const csvCommerzbankInstance = await plugins.csvCommerzbank.CsvCommerzbank.fromDir(
     paths.csvInputDir
   );
-  logger.log('ok', `found ${csvCommerzbankInstance.getTransactions().length} Commerzbank transactions`);
-  const commerzbankSimpleTransactions = csvCommerzbankInstance.getTransactions().map(transaction => {
+  logger.log('ok', `found ${(await csvCommerzbankInstance.getTransactions()).length} Commerzbank transactions`);
+  const commerzbankSimpleTransactions = (await csvCommerzbankInstance.getTransactions()).map(transaction => {
     return transaction.simpleTransaction;
   });
 
@@ -31,8 +31,8 @@ const parseFidor = async () => {
   const csvFidorInstance = await plugins.csvFidor.CsvFidor.fromDir(
     paths.csvInputDir
   );
-  logger.log('ok', `found ${csvFidorInstance.getTransactions().length} Commerzbank transactions`);
-  const fidorSimpleTransactions = csvFidorInstance.getTransactions().map(transaction => {
+  logger.log('ok', `found ${(await csvFidorInstance.getTransactions()).length} Commerzbank transactions`);
+  const fidorSimpleTransactions = (await csvFidorInstance.getTransactions()).map(transaction => {
     return transaction.simpleTransaction;
   });
 
@@ -44,8 +44,8 @@ const parseSpendesk = async () => {
   const csvSpendeskInstance = await plugins.csvSpendesk.CsvSpendesk.fromDir(
     paths.csvInputDir
   );
-  logger.log('ok', `found ${csvSpendeskInstance.getTransactions().length} Commerzbank transactions`);
-  const spendeskSimpleTransactions = csvSpendeskInstance.getTransactions().map(transaction => {
+  logger.log('ok', `found ${(await csvSpendeskInstance.getTransactions()).length} Commerzbank transactions`);
+  const spendeskSimpleTransactions = (await csvSpendeskInstance.getTransactions()).map(transaction => {
     return transaction.simpleTransaction;
   });
 
@@ -57,8 +57,8 @@ const parsePaypal = async () => {
   const csvSpendeskInstance = await plugins.csvSpendesk.CsvSpendesk.fromDir(
     paths.csvInputDir
   );
-  logger.log('ok', `found ${csvSpendeskInstance.getTransactions().length} Commerzbank transactions`);
-  const paypalSimpleTransactions = csvSpendeskInstance.getTransactions().map(transaction => {
+  logger.log('ok', `found ${(await csvSpendeskInstance.getTransactions()).length} Commerzbank transactions`);
+  const paypalSimpleTransactions = (await csvSpendeskInstance.getTransactions()).map(transaction => {
     return transaction.simpleTransaction;
   });
 
