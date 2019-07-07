@@ -54,11 +54,11 @@ const parseSpendesk = async () => {
 
 const parsePaypal = async () => {
   logger.log('info', `now parsing PayPal CSV file(s)`);
-  const csvSpendeskInstance = await plugins.csvSpendesk.CsvSpendesk.fromDir(
+  const csvPayPalInstance = await plugins.csvPayPal.CsvPayPal.fromDir(
     paths.csvInputDir
   );
-  logger.log('ok', `found ${(await csvSpendeskInstance.getTransactions()).length} Commerzbank transactions`);
-  const paypalSimpleTransactions = (await csvSpendeskInstance.getTransactions()).map(transaction => {
+  logger.log('ok', `found ${(await csvPayPalInstance.getTransactions()).length} PayPal transactions`);
+  const paypalSimpleTransactions = (await csvPayPalInstance.getTransactions()).map(transaction => {
     return transaction.simpleTransaction;
   });
 
