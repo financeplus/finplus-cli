@@ -11,6 +11,8 @@ export const run = async () => {
   const spendeskTransactions = await parseSpendesk();
   const paypalTransactions = await parsePaypal();
 
+  logger.log('success', `read files successfully! Now trying to write clean csv files!`);
+
 };
 
 const parseCommerzbank = async () => {
