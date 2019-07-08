@@ -6,72 +6,47 @@ export const run = async () => {
   const csvFilesList = await plugins.smartfile.fs.listFiles(paths.csvInputDir);
   console.log(csvFilesList);
   logger.log('info', `found ${csvFilesList.length} csv file(s)`);
-  const commerbankTransactions = await parseCommerzbank();
-  const fidorTransactions = await parseFidor();
-  const spendeskTransactions = await parseSpendesk();
-  const paypalTransactions = await parsePaypal();
+
+  // commerzbank
+  const commerzbankTransactions = await universalParse(await plugins.csvCommerzbank.CsvCommerzbank.fromDir(
+    paths.csvInputDir
+  ));
+  await writeSevdeskCli('commerzbank', commerzbankTransactions);
+
+  // fidor
+  const fidorTransactions = await universalParse(await plugins.csvFidor.CsvFidor.fromDir(paths.csvInputDir));
+  await writeSevdeskCli('fidor', fidorTransactions);
+  
+  // spendesk
+  const spendeskTransactions = await universalParse(await plugins.csvSpendesk.CsvSpendesk.fromDir(paths.csvInputDir));
+  await writeSevdeskCli('spendesk', spendeskTransactions);
+
+  // paypal
+  const paypalTransactions = await universalParse(await plugins.csvPayPal.CsvPayPal.fromDir(paths.csvInputDir));
+  await writeSevdeskCli('paypal', paypalTransactions);
 
   logger.log('success', `read files successfully! Now trying to write clean csv files!`);
 };
 
-const parseCommerzbank = async () => {
-  logger.log('info', `now parsing Commerzbank CSV file(s)`);
-  const csvCommerzbankInstance = await plugins.csvCommerzbank.CsvCommerzbank.fromDir(
-    paths.csvInputDir
-  );
+const writeSevdeskCli = async (nameArg: string, transactionArray: plugins.tsclass.ITransaction[]) => {
+  const csvSevdeskInstance = new plugins.csvSevdesk.CsvSevdesk();
+  const filePath = plugins.path.join(paths.csvOutputDir, nameArg + '.csv');
+  await plugins.smartfile.memory.toFs(await csvSevdeskInstance.createCsvString(transactionArray), filePath);
+};
+
+/**
+ * a universal parsing function
+ */
+const universalParse = async <T>(parser: plugins.finplusInterfaces.AcCsvParser<T>): Promise<plugins.tsclass.ITransaction[]> => {
   logger.log(
     'ok',
-    `found ${(await csvCommerzbankInstance.getTransactions()).length} Commerzbank transactions`
+    `found ${(await parser.getTransactions()).length} ${parser.paymentProviderName} transactions`
   );
-  const commerzbankSimpleTransactions = (await csvCommerzbankInstance.getTransactions()).map(
-    transaction => {
+  const commerzbankSimpleTransactions: plugins.tsclass.ITransaction[] = (await parser.getTransactions()).map(
+    (transaction: any) => { // TODO: implement a proper common type for this
       return transaction.simpleTransaction;
     }
   );
 
   return commerzbankSimpleTransactions;
-};
-
-const parseFidor = async () => {
-  logger.log('info', `now parsing Fidor CSV file(s)`);
-  const csvFidorInstance = await plugins.csvFidor.CsvFidor.fromDir(paths.csvInputDir);
-  logger.log(
-    'ok',
-    `found ${(await csvFidorInstance.getTransactions()).length} Commerzbank transactions`
-  );
-  const fidorSimpleTransactions = (await csvFidorInstance.getTransactions()).map(transaction => {
-    return transaction.simpleTransaction;
-  });
-
-  return fidorSimpleTransactions;
-};
-
-const parseSpendesk = async () => {
-  logger.log('info', `now parsing Spendesk CSV file(s)`);
-  const csvSpendeskInstance = await plugins.csvSpendesk.CsvSpendesk.fromDir(paths.csvInputDir);
-  logger.log(
-    'ok',
-    `found ${(await csvSpendeskInstance.getTransactions()).length} Commerzbank transactions`
-  );
-  const spendeskSimpleTransactions = (await csvSpendeskInstance.getTransactions()).map(
-    transaction => {
-      return transaction.simpleTransaction;
-    }
-  );
-
-  return spendeskSimpleTransactions;
-};
-
-const parsePaypal = async () => {
-  logger.log('info', `now parsing PayPal CSV file(s)`);
-  const csvPayPalInstance = await plugins.csvPayPal.CsvPayPal.fromDir(paths.csvInputDir);
-  logger.log(
-    'ok',
-    `found ${(await csvPayPalInstance.getTransactions()).length} PayPal transactions`
-  );
-  const paypalSimpleTransactions = (await csvPayPalInstance.getTransactions()).map(transaction => {
-    return transaction.simpleTransaction;
-  });
-
-  return paypalSimpleTransactions;
 };
