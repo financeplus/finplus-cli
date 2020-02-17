@@ -16,27 +16,28 @@
     "finplus": "./cli.js"
   },
   "devDependencies": {
-    "@gitzone/tsbuild": "^2.1.11",
-    "@gitzone/tstest": "^1.0.24",
-    "@pushrocks/tapbundle": "^3.0.11",
-    "@types/node": "^12.6.1",
-    "tslint": "^5.18.0",
+    "@gitzone/tsbuild": "^2.1.17",
+    "@gitzone/tstest": "^1.0.28",
+    "@pushrocks/tapbundle": "^3.0.13",
+    "@types/node": "^12.12.5",
+    "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.15.0"
   },
   "dependencies": {
+    "@financeplus/csv-bunq": "^1.0.8",
     "@financeplus/csv-commerzbank": "^1.0.11",
     "@financeplus/csv-fidor": "^1.0.16",
-    "@financeplus/csv-paypal": "^1.0.18",
+    "@financeplus/csv-paypal": "^1.0.20",
     "@financeplus/csv-sevdesk": "^1.0.10",
     "@financeplus/csv-spendesk": "^1.0.12",
     "@financeplus/finplus-interfaces": "^1.0.11",
     "@pushrocks/early": "^3.0.3",
     "@pushrocks/projectinfo": "^4.0.2",
     "@pushrocks/smartcli": "^3.0.7",
-    "@pushrocks/smartfile": "^7.0.4",
-    "@pushrocks/smartlog": "^2.0.19",
+    "@pushrocks/smartfile": "^7.0.6",
+    "@pushrocks/smartlog": "^2.0.21",
     "@pushrocks/smartlog-destination-local": "^8.0.2",
-    "@tsclass/tsclass": "^2.0.1"
+    "@tsclass/tsclass": "^2.0.13"
   },
   "files": [
     "ts/*",

@@ -8,6 +8,12 @@ export const run = async () => {
   logger.log('info', `found ${csvFilesList.length} csv file(s)`);
 
   // commerzbank
+  const bunqTransactions = await universalParse(await plugins.csvBunq.CsvBunq.fromDir(
+    paths.csvInputDir
+  ));
+  await writeSevdeskCli('bunq', bunqTransactions);
+
+  // commerzbank
   const commerzbankTransactions = await universalParse(await plugins.csvCommerzbank.CsvCommerzbank.fromDir(
     paths.csvInputDir
   ));
